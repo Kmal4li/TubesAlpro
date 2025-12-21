@@ -39,6 +39,7 @@ public class sistemDataKaryawan {
         int pilihan;
 
         do {
+            // menu
             System.out.println("\n=== MENU SISTEM DATA KARYAWAN ===");
             System.out.println("1. Tambah Karyawan");
             System.out.println("2. Tampilkan Semua Karyawan");
@@ -51,6 +52,7 @@ public class sistemDataKaryawan {
             System.out.print("Pilihan: ");
             pilihan = input.nextInt();
 
+            // memilih menu
             switch (pilihan) {
                 case 1 -> tambahKaryawan();
                 case 2 -> tampilkanSemua();
@@ -64,6 +66,7 @@ public class sistemDataKaryawan {
         } while (pilihan != 7);
     }
 
+    // tambha karyawan
     public static void tambahKaryawan() {
         System.out.println("\n=== TAMBAH KARYAWAN ===");
         System.out.print("NIK: ");
@@ -92,11 +95,9 @@ public class sistemDataKaryawan {
                 new Karyawan(nik, nama, posisi, departemen, alamat, gaji, tglMasuk);
 
         System.out.println("Karyawan berhasil ditambahkan!");
-
-        // gagal menambah
-        
     }
 
+    // menampilkan semua karyawan
     public static void tampilkanSemua() {
         if (jumlahKaryawan == 0) {
             System.out.println("Belum ada data karyawan.");
@@ -108,6 +109,7 @@ public class sistemDataKaryawan {
         }
     }
 
+    // cari karyawan
     public static void cariKaryawan() {
         System.out.println("\n=== CARI KARYAWAN ===");
         System.out.print("Masukkan NIK atau Nama: ");
@@ -122,6 +124,7 @@ public class sistemDataKaryawan {
             }
         }
 
+        // error handling jika tidak ditemukan
         if (!ditemukan) {
             System.out.println("Karyawan tidak ditemukan!");
         }
@@ -152,7 +155,7 @@ public class sistemDataKaryawan {
         System.out.println("\nData karyawan saat ini:");
         daftarKaryawan[index].tampilkanData();
 
-        // menu edit
+        // memilih data yang ingin diedit
         System.out.println("\nPilih data yang ingin diedit:");
         System.out.println("1. Nama");
         System.out.println("2. Posisi");
@@ -163,7 +166,7 @@ public class sistemDataKaryawan {
         System.out.print("Pilih (1-6): ");
         int pilihan = input.nextInt();
 
-        // proses edit
+        // mengedit sesuai pilihan diatas
         switch (pilihan) {
             case 1:
                 System.out.print("Nama baru: ");
@@ -198,6 +201,7 @@ public class sistemDataKaryawan {
         daftarKaryawan[index].tampilkanData();
     }
 
+    // hapus karyawan
     public static void hapusKaryawan() {
         System.out.println("\n=== HAPUS KARYAWAN ===");
         System.out.print("Masukkan NIK: ");
@@ -213,9 +217,11 @@ public class sistemDataKaryawan {
                 return;
             }
         }
+        // error handling jika tidak ditemukan
         System.out.println("Karyawan tidak ditemukan!");
     }
 
+    // cuti
     public static void ajukanCuti() {
         System.out.println("\n=== AJUKAN CUTI ===");
         System.out.print("Masukkan NIK: ");
@@ -226,17 +232,20 @@ public class sistemDataKaryawan {
                 System.out.print("Jumlah cuti: ");
                 int hari = input.nextInt();
 
+                // mengecek saldo cuti
                 if (hari > daftarKaryawan[i].saldoCuti) {
                     System.out.println("Saldo cuti tidak cukup!");
                     return;
                 }
 
+                // mengurangi saldo sesuai jumlah cuti yang diinginkan
                 daftarKaryawan[i].saldoCuti -= hari;
                 System.out.println("Berhasil mengajukan cuti!");
                 System.out.println("Saldo cuti tersisa: " + daftarKaryawan[i].saldoCuti);
                 return;
             }
         }
+        // error handling jika tidak ditemukan
         System.out.println("Karyawan tidak ditemukan!");
     }
 }
