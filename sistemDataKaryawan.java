@@ -54,14 +54,28 @@ public class sistemDataKaryawan {
 
             // memilih menu
             switch (pilihan) {
-                case 1 -> tambahKaryawan();
-                case 2 -> tampilkanSemua();
-                case 3 -> cariKaryawan();
-                case 4 -> editKaryawan();
-                case 5 -> hapusKaryawan();
-                case 6 -> ajukanCuti();
-                case 7 -> System.out.println("Keluar...");
-                default -> System.out.println("Pilihan tidak valid!");
+                case 1: 
+                    tambahKaryawan();
+                    break;
+                case 2: 
+                    tampilkanSemua();
+                    break;
+                case 3: 
+                    cariKaryawan();
+                    break;
+                case 4: 
+                    editKaryawan();
+                    break;
+                case 5: 
+                    hapusKaryawan();
+                    break;
+                case 6: 
+                    ajukanCuti();
+                    break;
+                case 7: 
+                    System.out.println("Keluar...");
+                    break;
+                default: System.out.println("Pilihan tidak valid! Pilih (1-7)");
             }
         } while (pilihan != 7);
     }
