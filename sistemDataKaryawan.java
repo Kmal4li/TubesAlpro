@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 class Karyawan {
@@ -80,7 +81,7 @@ public class sistemDataKaryawan {
         } while (pilihan != 7);
     }
 
-    // tambha karyawan
+    // tambah karyawan
     public static void tambahKaryawan() {
         System.out.println("\n=== TAMBAH KARYAWAN ===");
         System.out.print("NIK: ");
@@ -150,8 +151,9 @@ public class sistemDataKaryawan {
         System.out.print("Masukkan NIK karyawan yang ingin diedit: ");
         int nikCari = input.nextInt();
 
-        // cari karyawan
         int index = -1;
+
+        // mencari karyawan
         for (int i = 0; i < jumlahKaryawan; i++) {
             if (daftarKaryawan[i].nik == nikCari) {
                 index = i;
@@ -159,9 +161,9 @@ public class sistemDataKaryawan {
             }
         }
 
-        // error handling jika tidak ditemukan
+        // jika tidak ditemukan
         if (index == -1) {
-            System.out.println("Karyawan dengan NIK " + nikCari + " tidak ditemukan!");
+            System.out.println("Karyawan tidak ditemukan!");
             return;
         }
 
@@ -169,7 +171,7 @@ public class sistemDataKaryawan {
         System.out.println("\nData karyawan saat ini:");
         daftarKaryawan[index].tampilkanData();
 
-        // memilih data yang ingin diedit
+        // menu edit
         System.out.println("\nPilih data yang ingin diedit:");
         System.out.println("1. Nama");
         System.out.println("2. Posisi");
@@ -177,10 +179,11 @@ public class sistemDataKaryawan {
         System.out.println("4. Alamat");
         System.out.println("5. Gaji");
         System.out.println("6. Tanggal Masuk");
-        System.out.print("Pilih (1-6): ");
+        System.out.println("7. Edit Semua Data");
+        System.out.println("=========================");
+        System.out.print("Pilihan: ");
         int pilihan = input.nextInt();
 
-        // mengedit sesuai pilihan diatas
         switch (pilihan) {
             case 1:
                 System.out.print("Nama baru: ");
@@ -203,7 +206,21 @@ public class sistemDataKaryawan {
                 daftarKaryawan[index].gaji = input.nextInt();
                 break;
             case 6:
-                System.out.print("Tanggal Masuk baru: ");
+                System.out.print("Tanggal masuk baru: ");
+                daftarKaryawan[index].tglMasuk = input.next();
+                break;
+            case 7:
+                System.out.print("Nama baru: ");
+                daftarKaryawan[index].nama = input.next();
+                System.out.print("Posisi baru: ");
+                daftarKaryawan[index].posisi = input.next();
+                System.out.print("Departemen baru: ");
+                daftarKaryawan[index].departemen = input.next();
+                System.out.print("Alamat baru: ");
+                daftarKaryawan[index].alamat = input.next();
+                System.out.print("Gaji baru: ");
+                daftarKaryawan[index].gaji = input.nextInt();
+                System.out.print("Tanggal Masuk baru (YYYY-MM-DD): ");
                 daftarKaryawan[index].tglMasuk = input.next();
                 break;
             default:
@@ -211,28 +228,49 @@ public class sistemDataKaryawan {
                 return;
         }
 
-        System.out.println("\nData berhasil diupdate!");
-        daftarKaryawan[index].tampilkanData();
+        System.out.println("\nData berhasil diperbarui!");
     }
 
-    // hapus karyawan
+    // hapus data karyawan
     public static void hapusKaryawan() {
         System.out.println("\n=== HAPUS KARYAWAN ===");
-        System.out.print("Masukkan NIK: ");
+        System.out.print("Masukkan NIK karyawan yang ingin dihapus: ");
         int nikCari = input.nextInt();
 
+        int index = -1;
+
+        // mencari karyawan
         for (int i = 0; i < jumlahKaryawan; i++) {
             if (daftarKaryawan[i].nik == nikCari) {
-                for (int j = i; j < jumlahKaryawan - 1; j++) {
-                    daftarKaryawan[j] = daftarKaryawan[j + 1];
-                }
-                jumlahKaryawan--;
-                System.out.println("Data dihapus!");
-                return;
+                index = i;
+                break;
             }
         }
-        // error handling jika tidak ditemukan
-        System.out.println("Karyawan tidak ditemukan!");
+
+        // jika tidak ditemukan
+        if (index == -1) {
+            System.out.println("Karyawan tidak ditemukan!");
+            return;
+        }
+
+        // tampilkan data karyawan
+        System.out.println("\nData karyawan yang akan dihapus:");
+        daftarKaryawan[index].tampilkanData();
+
+        // konfirmasi
+        System.out.print("Apakah yakin ingin menghapus? (y/n): ");
+        String konfirmasi = input.next();
+
+        if (konfirmasi.equalsIgnoreCase("y")) {
+            // geser array ke kiri
+            for (int i = index; i < jumlahKaryawan - 1; i++) {
+                daftarKaryawan[i] = daftarKaryawan[i + 1];
+            }
+            jumlahKaryawan--;
+            System.out.println("Data karyawan berhasil dihapus!");
+        } else {
+            System.out.println("Penghapusan dibatalkan.");
+        }
     }
 
     // cuti
